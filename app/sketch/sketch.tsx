@@ -4,11 +4,9 @@ import { drawOutline } from "../../lib/drawOutline";
 import React from "react";
 import { type Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
+import { Image } from "p5";
 
 export const SketchComponent = () => {
-  const alphaRef = useRef<number>(0);
-  const betaRef = useRef<number>(0);
-  const gammaRef = useRef<number>(0);
   const p5Ref = useRef(null);
   // module aliases
   const Engine = Matter.Engine,
@@ -22,6 +20,8 @@ export const SketchComponent = () => {
 
   const floors: (typeof Bodies)[] = [];
   const characters: (typeof Bodies)[] = [];
+  const imageArrayRef = useRef<Image[]>([]);
+  const characterSize = { w: 40, h: 40 };
 
   // create an engine
   let engine: typeof Engine;
@@ -32,10 +32,6 @@ export const SketchComponent = () => {
 
     const updateGravity = (event) => {
       const gravity = engine.world.gravity;
-
-      alphaRef.current = event.alpha;
-      betaRef.current = event.beta;
-      gammaRef.current = event.gamma;
 
       gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
       gravity.y = Common.clamp(event.beta, -90, 90) / 90;
@@ -72,14 +68,21 @@ export const SketchComponent = () => {
       })
     );
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 100; i++) {
       characters.push(
-        Bodies.trapezoid(width / 2 + Math.random() * 100 - 50, 0, 40, 40, 0.2, {
-          density: 1, //密度
-          frictionAir: 0.1, //空気抵抗
-          restitution: 0, //反発係数
-          friction: 0.8, //摩擦
-        })
+        Bodies.trapezoid(
+          width / 2 + Math.random() * 100 - 50,
+          0,
+          characterSize.w,
+          characterSize.h,
+          0.2,
+          {
+            density: 1, //密度
+            frictionAir: 0.1, //空気抵抗
+            restitution: 0, //反発係数
+            friction: 0.8, //摩擦
+          }
+        )
       );
     }
 
@@ -105,10 +108,15 @@ export const SketchComponent = () => {
     const runner = Runner.create();
     Runner.run(runner, engine);
 
-    p5.preload = () => {};
+    p5.preload = () => {
+      const path = "img/chiri-test.png";
+      const img = p5.loadImage(path);
+      imageArrayRef.current.push(img);
+    };
 
     p5.setup = () => {
       p5.createCanvas(width, height);
+      p5.imageMode(p5.CENTER);
     };
 
     p5.draw = () => {
@@ -117,20 +125,28 @@ export const SketchComponent = () => {
 
       p5.push();
       p5.fill(255);
-      p5.text(alphaRef.current, 100, 100);
-      p5.text(betaRef.current, 100, 120);
-      p5.text(gammaRef.current, 100, 140);
       p5.pop();
       p5.push();
       p5.noFill();
       p5.stroke(255, 0, 0);
       p5.strokeWeight(1);
       for (const char of characters) {
-        drawOutline(char, p5);
+        // drawOutline(char, p5);
+        p5.push();
+        p5.translate(char.position.x, char.position.y);
+        p5.rotate(char.angle);
+        p5.image(
+          imageArrayRef.current[0],
+          0,
+          0,
+          characterSize.w,
+          characterSize.h
+        );
+        p5.pop();
       }
-      for (const floor of floors) {
-        drawOutline(floor, p5);
-      }
+      // for (const floor of floors) {
+      // drawOutline(floor, p5);
+      // }
       p5.pop();
 
       Engine.update(engine);
