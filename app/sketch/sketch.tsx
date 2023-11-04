@@ -29,28 +29,27 @@ export const SketchComponent = () => {
     const height = window.innerHeight;
 
     const updateGravity = (event) => {
-      const orientation = screen.orientation.angle,
-        gravity = engine.world.gravity;
+      const gravity = engine.world.gravity;
 
-      angleRef.current = orientation;
+      angleRef.current = event.alpha;
       console.log(engine.world.gravity);
 
-      if (orientation === 0) {
-        gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
-        gravity.y = Common.clamp(event.beta, -90, 90) / 90;
-      } else if (orientation === 180) {
-        gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
-        gravity.y = Common.clamp(-event.beta, -90, 90) / 90;
-      } else if (orientation === 90) {
-        gravity.x = Common.clamp(event.beta, -90, 90) / 90;
-        gravity.y = Common.clamp(-event.gamma, -90, 90) / 90;
-      } else if (orientation === -90) {
-        gravity.x = Common.clamp(-event.beta, -90, 90) / 90;
-        gravity.y = Common.clamp(event.gamma, -90, 90) / 90;
-      }
+      // if (orientation === 0) {
+      //   gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
+      //   gravity.y = Common.clamp(event.beta, -90, 90) / 90;
+      // } else if (orientation === 180) {
+      //   gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
+      //   gravity.y = Common.clamp(-event.beta, -90, 90) / 90;
+      // } else if (orientation === 90) {
+      //   gravity.x = Common.clamp(event.beta, -90, 90) / 90;
+      //   gravity.y = Common.clamp(-event.gamma, -90, 90) / 90;
+      // } else if (orientation === -90) {
+      //   gravity.x = Common.clamp(-event.beta, -90, 90) / 90;
+      //   gravity.y = Common.clamp(event.gamma, -90, 90) / 90;
+      // }
     };
 
-    screen.orientation.addEventListener("change", updateGravity);
+    window.addEventListener("deviceorientation", updateGravity);
     // 床追加
     floors.push(
       Bodies.rectangle(width / 2, height, width, 10, {
@@ -114,7 +113,7 @@ export const SketchComponent = () => {
 
       p5.push();
       p5.fill(255);
-      p5.text(window.screen.orientation.angle, 100, 100);
+      p5.text(angleRef.current, 100, 100);
       p5.pop();
       p5.push();
       p5.noFill();
