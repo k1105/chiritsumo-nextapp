@@ -114,7 +114,7 @@ export const SketchComponent = () => {
 
       p5.push();
       p5.fill(255);
-      p5.text(angleRef.current, 100, 100);
+      p5.text(screen.orientation.angle, 100, 100);
       p5.pop();
       p5.push();
       p5.noFill();
