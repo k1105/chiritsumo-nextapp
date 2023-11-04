@@ -10,9 +10,6 @@ export default function Home() {
       <div className={styles.sketch}>
         <SketchComponent />
       </div>
-      <p>index</p>
-      <p>index</p>
-      <p>index</p>
     </main>
   );
 }

@@ -6,6 +6,7 @@ import { type Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 
 export const SketchComponent = () => {
+  const angleRef = useRef<number>(0);
   const p5Ref = useRef(null);
   // module aliases
   const Engine = Matter.Engine,
@@ -29,9 +30,10 @@ export const SketchComponent = () => {
     typeof screen.orientation !== "undefined"
   ) {
     const updateGravity = function (event) {
-      let orientation = screen.orientation.angle,
+      const orientation = screen.orientation.angle,
         gravity = engine.world.gravity;
 
+      angleRef.current = orientation;
       //      console.log(engine.world.gravity);
 
       if (orientation === 0) {
@@ -116,6 +118,10 @@ export const SketchComponent = () => {
       //@ts-ignore
       p5.clear();
 
+      p5.push();
+      p5.fill(255);
+      p5.text(angleRef.current, 100, 100);
+      p5.pop();
       p5.push();
       p5.noFill();
       p5.stroke(255, 0, 0);
