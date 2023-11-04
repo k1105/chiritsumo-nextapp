@@ -14,6 +14,7 @@ export const SketchComponent = () => {
     Mouse = Matter.Mouse,
     Render = Matter.Render,
     Runner = Matter.Runner,
+    Common = Matter.Common,
     MouseConstraint = Matter.MouseConstraint;
 
   const floors: (typeof Bodies)[] = [];
@@ -21,6 +22,35 @@ export const SketchComponent = () => {
 
   // create an engine
   let engine: typeof Engine;
+
+  // add gyro control
+  if (
+    typeof window !== "undefined" &&
+    typeof screen.orientation !== "undefined"
+  ) {
+    const updateGravity = function (event) {
+      let orientation = screen.orientation.angle,
+        gravity = engine.world.gravity;
+
+      //      console.log(engine.world.gravity);
+
+      if (orientation === 0) {
+        gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
+        gravity.y = Common.clamp(event.beta, -90, 90) / 90;
+      } else if (orientation === 180) {
+        gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
+        gravity.y = Common.clamp(-event.beta, -90, 90) / 90;
+      } else if (orientation === 90) {
+        gravity.x = Common.clamp(event.beta, -90, 90) / 90;
+        gravity.y = Common.clamp(-event.gamma, -90, 90) / 90;
+      } else if (orientation === -90) {
+        gravity.x = Common.clamp(-event.beta, -90, 90) / 90;
+        gravity.y = Common.clamp(event.gamma, -90, 90) / 90;
+      }
+    };
+
+    screen.orientation.addEventListener("onchange", updateGravity);
+  }
 
   const sketch: Sketch = (p5) => {
     const width = window.innerWidth;
