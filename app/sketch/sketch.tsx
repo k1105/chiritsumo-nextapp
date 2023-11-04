@@ -33,7 +33,7 @@ export const SketchComponent = () => {
         gravity = engine.world.gravity;
 
       angleRef.current = orientation;
-      //      console.log(engine.world.gravity);
+      console.log(engine.world.gravity);
 
       if (orientation === 0) {
         gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
@@ -50,7 +50,7 @@ export const SketchComponent = () => {
       }
     };
 
-    screen.orientation.addEventListener("onchange", updateGravity);
+    screen.orientation.addEventListener("change", updateGravity);
     // 床追加
     floors.push(
       Bodies.rectangle(width / 2, height, width, 10, {
