@@ -34,7 +34,7 @@ export default function Home() {
 
   useEffect(() => {
     // if (navigator.userAgent.match(/iPhone/)) {
-    startButtonRef.current!.style.display = "default";
+    //startButtonRef.current!.style.display = "default";
     // ボタンクリックでrequestDeviceOrientationPermission実行
     startButtonRef.current!.addEventListener(
       "click",
@@ -49,9 +49,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.sketch}>
-        <button ref={startButtonRef} style={{ display: "none" }}>
-          Start
-        </button>
+        <button ref={startButtonRef}>Start</button>
         <SketchComponent />
       </div>
     </main>
