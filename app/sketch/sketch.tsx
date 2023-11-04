@@ -21,7 +21,7 @@ export const SketchComponent = () => {
   const floors: (typeof Bodies)[] = [];
   const characters: (typeof Bodies)[] = [];
   const imageArrayRef = useRef<Image[]>([]);
-  const characterSize = { w: 40, h: 40 };
+  const imageLength = 100;
 
   // create an engine
   let engine: typeof Engine;
@@ -29,6 +29,8 @@ export const SketchComponent = () => {
   const sketch: Sketch = (p5) => {
     const width = window.innerWidth;
     const height = window.innerHeight;
+
+    const characterSize = width > 1200 ? { w: 60, h: 60 } : { w: 40, h: 40 };
 
     const updateGravity = (event) => {
       const gravity = engine.world.gravity;
@@ -53,26 +55,63 @@ export const SketchComponent = () => {
     window.addEventListener("deviceorientation", updateGravity);
     // 床追加
     floors.push(
-      Bodies.rectangle(width / 2, height, width, 10, {
+      Bodies.rectangle(width / 2, height * 0.95, width, height * 0.1, {
         isStatic: true,
       })
     );
     floors.push(
-      Bodies.rectangle(width, height / 2, 10, height, {
+      Bodies.rectangle(width + 60, height / 2, 100, height * 2, {
         isStatic: true,
       })
     );
     floors.push(
-      Bodies.rectangle(0, height / 2, 10, height, {
+      Bodies.rectangle(-60, height / 2, 100, height * 2, {
+        isStatic: true,
+      })
+    );
+    floors.push(
+      Bodies.rectangle((width / 3) * 2, height / 2, 10, height, {
         isStatic: true,
       })
     );
 
-    for (let i = 0; i < 100; i++) {
-      characters.push(
-        Bodies.trapezoid(
+    if (width > 1200) {
+      //pc用のブレークポイント
+      floors.push(
+        Bodies.rectangle((width / 3) * 2, height / 2, 10, height, {
+          isStatic: true,
+        })
+      );
+      floors.push(
+        Bodies.rectangle(width / 3, height / 2, 10, height, {
+          isStatic: true,
+        })
+      );
+    }
+
+    // for (let i = 0; i < 100; i++) {
+    //   characters.push(
+    //     Bodies.trapezoid(
+    //       width / 2 + Math.random() * 100 - 50,
+    //       0,
+    //       characterSize.w,
+    //       characterSize.h,
+    //       0.2,
+    //       {
+    //         density: 1, //密度
+    //         frictionAir: 0.1, //空気抵抗
+    //         restitution: 0, //反発係数
+    //         friction: 0.8, //摩擦
+    //       }
+    //     )
+    //   );
+    // }
+
+    setInterval(() => {
+      if (characters.length < imageLength) {
+        const char = Bodies.trapezoid(
           width / 2 + Math.random() * 100 - 50,
-          0,
+          -100,
           characterSize.w,
           characterSize.h,
           0.2,
@@ -82,9 +121,11 @@ export const SketchComponent = () => {
             restitution: 0, //反発係数
             friction: 0.8, //摩擦
           }
-        )
-      );
-    }
+        );
+        characters.push(char);
+        Composite.add(engine.world, char);
+      }
+    }, 100);
 
     engine = Engine.create();
     Composite.add(engine.world, [...floors, ...characters]);
@@ -115,7 +156,7 @@ export const SketchComponent = () => {
     };
 
     p5.setup = () => {
-      p5.createCanvas(width, height);
+      p5.createCanvas(width, height * 0.9);
       p5.imageMode(p5.CENTER);
     };
 
