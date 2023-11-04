@@ -24,12 +24,11 @@ export const SketchComponent = () => {
   // create an engine
   let engine: typeof Engine;
 
-  // add gyro control
-  if (
-    typeof window !== "undefined" &&
-    typeof screen.orientation !== "undefined"
-  ) {
-    const updateGravity = function (event) {
+  const sketch: Sketch = (p5) => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const updateGravity = (event) => {
       const orientation = screen.orientation.angle,
         gravity = engine.world.gravity;
 
@@ -52,11 +51,6 @@ export const SketchComponent = () => {
     };
 
     screen.orientation.addEventListener("onchange", updateGravity);
-  }
-
-  const sketch: Sketch = (p5) => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
     // 床追加
     floors.push(
       Bodies.rectangle(width / 2, height, width, 10, {
