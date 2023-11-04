@@ -60,17 +60,12 @@ export const SketchComponent = () => {
       })
     );
     floors.push(
-      Bodies.rectangle(width + 60, height / 2, 100, height * 2, {
+      Bodies.rectangle(width + 40, height / 2, 100, height * 2, {
         isStatic: true,
       })
     );
     floors.push(
-      Bodies.rectangle(-60, height / 2, 100, height * 2, {
-        isStatic: true,
-      })
-    );
-    floors.push(
-      Bodies.rectangle((width / 3) * 2, height / 2, 10, height, {
+      Bodies.rectangle(-40, height / 2, 100, height * 2, {
         isStatic: true,
       })
     );
