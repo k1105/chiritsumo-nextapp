@@ -33,17 +33,17 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // if (navigator.userAgent.match(/iPhone/)) {
-    //startButtonRef.current!.style.display = "default";
-    // ボタンクリックでrequestDeviceOrientationPermission実行
-    startButtonRef.current!.addEventListener(
-      "click",
-      requestDeviceOrientationPermission,
-      false
-    );
-    // } else {
-    //   startButtonRef.current!.style.display = "none";
-    // }
+    if (navigator.userAgent.match(/iPhone/)) {
+      //startButtonRef.current!.style.display = "default";
+      // ボタンクリックでrequestDeviceOrientationPermission実行
+      startButtonRef.current!.addEventListener(
+        "click",
+        requestDeviceOrientationPermission,
+        false
+      );
+    } else {
+      startButtonRef.current!.style.display = "none";
+    }
   }, []);
 
   return (
