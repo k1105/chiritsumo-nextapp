@@ -6,7 +6,9 @@ import { type Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 
 export const SketchComponent = () => {
-  const angleRef = useRef<number>(0);
+  const alphaRef = useRef<number>(0);
+  const betaRef = useRef<number>(0);
+  const gammaRef = useRef<number>(0);
   const p5Ref = useRef(null);
   // module aliases
   const Engine = Matter.Engine,
@@ -31,12 +33,15 @@ export const SketchComponent = () => {
     const updateGravity = (event) => {
       const gravity = engine.world.gravity;
 
-      angleRef.current = event.alpha;
-      console.log(engine.world.gravity);
+      alphaRef.current = event.alpha;
+      betaRef.current = event.beta;
+      gammaRef.current = event.gamma;
+
+      gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
+      gravity.y = Common.clamp(event.beta, -90, 90) / 90;
 
       // if (orientation === 0) {
-      //   gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
-      //   gravity.y = Common.clamp(event.beta, -90, 90) / 90;
+
       // } else if (orientation === 180) {
       //   gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
       //   gravity.y = Common.clamp(-event.beta, -90, 90) / 90;
@@ -104,7 +109,6 @@ export const SketchComponent = () => {
 
     p5.setup = () => {
       p5.createCanvas(width, height);
-      console.log("hoge");
     };
 
     p5.draw = () => {
@@ -113,7 +117,9 @@ export const SketchComponent = () => {
 
       p5.push();
       p5.fill(255);
-      p5.text(angleRef.current, 100, 100);
+      p5.text(alphaRef.current, 100, 100);
+      p5.text(betaRef.current, 100, 120);
+      p5.text(gammaRef.current, 100, 140);
       p5.pop();
       p5.push();
       p5.noFill();
