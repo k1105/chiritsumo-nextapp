@@ -234,6 +234,11 @@
   dependencies:
     undici-types "~5.26.4"
 
+"@types/p5@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@types/p5/-/p5-1.7.1.tgz#e294eaf28c154f6e2472ee2d202b8da88596521b"
+  integrity sha512-pnKfjUZBsOSxt19ZOmvn8VvBX2vQXG4I2yQ2TVNcf0s65xWKy/nKu2C2ByfaYuXNTeywQHJ98QKBKWSQikD7fA==
+
 "@types/prop-types@*":
   version "15.7.9"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.9.tgz#b6f785caa7ea1fe4414d9df42ee0ab67f23d8a6d"
