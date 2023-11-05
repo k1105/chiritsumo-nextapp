@@ -21,7 +21,7 @@ export const SketchComponent = () => {
   const floors: (typeof Bodies)[] = [];
   const characters: (typeof Bodies)[] = [];
   const imageArrayRef = useRef<Image[]>([]);
-  const imageLength = 100;
+  const imageLength = 89;
 
   // create an engine
   let engine: typeof Engine;
@@ -145,9 +145,11 @@ export const SketchComponent = () => {
     Runner.run(runner, engine);
 
     p5.preload = () => {
-      const path = "img/chiri-test.png";
-      const img = p5.loadImage(path);
-      imageArrayRef.current.push(img);
+      for (let i = 0; i < imageLength; i++) {
+        const path = "img/chiri-" + String(i + 1) + ".png";
+        const img = p5.loadImage(path);
+        imageArrayRef.current.push(img);
+      }
     };
 
     p5.setup = () => {
@@ -166,20 +168,20 @@ export const SketchComponent = () => {
       p5.noFill();
       p5.stroke(255, 0, 0);
       p5.strokeWeight(1);
-      for (const char of characters) {
+      characters.forEach((char, i) => {
         // drawOutline(char, p5);
         p5.push();
         p5.translate(char.position.x, char.position.y);
         p5.rotate(char.angle);
         p5.image(
-          imageArrayRef.current[0],
+          imageArrayRef.current[i],
           0,
           0,
           characterSize.w,
           characterSize.h
         );
         p5.pop();
-      }
+      });
       // for (const floor of floors) {
       // drawOutline(floor, p5);
       // }
