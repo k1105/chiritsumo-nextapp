@@ -146,7 +146,7 @@ export const SketchComponent = () => {
 
     p5.preload = () => {
       for (let i = 0; i < imageLength; i++) {
-        const path = "img/chiri-" + String(i + 1) + ".png";
+        const path = "img/small/chiri-" + String(i + 1) + ".png";
         const img = p5.loadImage(path);
         imageArrayRef.current.push(img);
       }
