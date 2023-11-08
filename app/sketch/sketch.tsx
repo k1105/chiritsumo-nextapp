@@ -5,6 +5,9 @@ import React from "react";
 import { type Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { Image } from "p5";
+import { useDispatch } from "react-redux";
+import { setCount } from "../../components/ConterSlice";
+import { AppDispatch } from "../../store";
 
 export const SketchComponent = () => {
   const p5Ref = useRef(null);
@@ -23,6 +26,7 @@ export const SketchComponent = () => {
   const imageArrayRef = useRef<Image[]>([]);
   const imageLength = 89;
   const imagePath = useRef<string>("/img/large/chiri-1.png");
+  const dispatch: AppDispatch = useDispatch();
 
   // create an engine
   let engine: typeof Engine;
@@ -119,6 +123,7 @@ export const SketchComponent = () => {
         mouseConstraint.body &&
         mouseConstraint.body.label == "Trapezoid Body"
       ) {
+        dispatch(setCount(mouseConstraint.body.id - 6));
         imagePath.current =
           "/img/large/chiri-" + String(mouseConstraint.body.id - 4) + ".png";
       }

@@ -5,6 +5,9 @@ import styles from "./page.module.css";
 import { RequestPermissionModal } from "./requestPermissionModal";
 import { InvertButton } from "../components/invertButton";
 import { HeadingImage } from "@/components/HeadingImage";
+import { Chiri } from "@/components/Chiri";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 export default function Home() {
   const [requested, setRequested] = useState<boolean>(true);
@@ -27,14 +30,18 @@ export default function Home() {
       {!requested ? (
         <RequestPermissionModal setRequested={setRequested} />
       ) : (
-        <div>
-          <div className={styles.sketch}>
-            <SketchComponent />
+        <Provider store={store}>
+          <div>
+            <div className={styles.sketch}>
+              <SketchComponent />
+            </div>
+            <div className={styles.invertButton}>
+              {/* <InvertButton mainRef={mainRef} /> */}
+
+              <Chiri />
+            </div>
           </div>
-          <div className={styles.invertButton}>
-            <InvertButton mainRef={mainRef} />
-          </div>
-        </div>
+        </Provider>
       )}
     </main>
   );
