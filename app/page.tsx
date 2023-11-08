@@ -4,7 +4,6 @@ import { SketchComponent } from "./sketch/sketch";
 import styles from "./page.module.css";
 import { RequestPermissionModal } from "./requestPermissionModal";
 import { InvertButton } from "../components/invertButton";
-import { HeadingImage } from "@/components/HeadingImage";
 import { Chiri } from "@/components/Chiri";
 import { Provider } from "react-redux";
 import { store } from "../store";
@@ -18,7 +17,7 @@ export default function Home() {
     if (navigator.userAgent.match(/iPhone/)) {
       setRequested(false);
     }
-    // imageRef.current.src = "/img/large/chiri-80.png";
+    // imageRef.current.src = "/img/large/chiri-80.webp";
   }, []);
 
   return (

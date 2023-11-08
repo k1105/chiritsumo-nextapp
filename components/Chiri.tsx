@@ -5,10 +5,10 @@ import Image from "next/image";
 
 export const Chiri: React.FC = () => {
   const count = useSelector((state: RootState) => state.counter.value);
-  const [imagePath, setImagePath] = useState("/img/small/chiri-1.png");
+  const [imagePath, setImagePath] = useState("/img/small/chiri-1.webp");
 
   useEffect(() => {
-    setImagePath("/img/large/chiri-" + count + ".png");
+    setImagePath("/img/large/chiri-" + count + ".webp");
   }, [count]);
 
   //   const dispatch: AppDispatch = useDispatch();
@@ -20,10 +20,24 @@ export const Chiri: React.FC = () => {
         pointerEvents: "none",
       }}
     >
-      <div style={{ height: "25vh", width: "25vh" }}>
-        <Image src={imagePath} layout="fill" objectFit="contain" alt="chiri" />
+      <div
+        style={{
+          height: "80vh",
+          width: "80vh",
+          position: "fixed",
+          marginTop: "-20vh",
+          marginLeft: "-20vh",
+        }}
+      >
+        <Image
+          src={imagePath}
+          fill
+          priority
+          style={{ objectFit: "contain" }}
+          alt="chiri"
+        />
       </div>
-      {/* <p
+      <p
         style={{
           fontWeight: 600,
           fontSize: "1rem",
@@ -34,7 +48,7 @@ export const Chiri: React.FC = () => {
         {count < 10 ? "0" + String(count) : count}
         <br />
         2021.11.05
-      </p> */}
+      </p>
       {/* <p style={{ fontWeight: 600, fontSize: "2rem" }}>Chiritsumo Challenge</p> */}
     </div>
   );

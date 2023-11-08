@@ -23,8 +23,8 @@ export const SketchComponent = () => {
   const floors: (typeof Bodies)[] = [];
   const characters: (typeof Bodies)[] = [];
   const imageArrayRef = useRef<Image[]>([]);
-  const imageLength = 89;
-  const imagePath = useRef<string>("/img/large/chiri-1.png");
+  const imageLength = 90;
+  const imagePath = useRef<string>("/img/large/chiri-1.webp");
   const dispatch: AppDispatch = useDispatch();
 
   // create an engine
@@ -135,13 +135,13 @@ export const SketchComponent = () => {
       ) {
         dispatch(setCount(mouseConstraint.body.id - 6));
         imagePath.current =
-          "/img/large/chiri-" + String(mouseConstraint.body.id - 4) + ".png";
+          "/img/large/chiri-" + String(mouseConstraint.body.id - 4) + ".webp";
       }
     });
 
     p5.preload = () => {
       for (let i = 0; i < imageLength; i++) {
-        const path = "img/small/chiri-" + String(i + 1) + ".png";
+        const path = "img/small/chiri-" + String(i + 1) + ".webp";
         const img = p5.loadImage(path);
         imageArrayRef.current.push(img);
       }
@@ -172,8 +172,8 @@ export const SketchComponent = () => {
           imageArrayRef.current[i],
           0,
           0,
-          characterSize.w,
-          characterSize.h
+          characterSize.w * 2.4,
+          characterSize.h * 2.4
         );
         p5.pop();
       });

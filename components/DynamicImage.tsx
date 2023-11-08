@@ -4,8 +4,8 @@ import Image from "next/image";
 // 静的なリストを用意するか、API経由でサーバーサイドでリストを取得する必要があります。
 const imagePaths = [];
 
-for (let i = 0; i < 89; i++) {
-  imagePaths.push("/img/small/chiri-" + String(i + 1) + ".png");
+for (let i = 0; i < 90; i++) {
+  imagePaths.push("/img/small/chiri-" + String(i + 1) + ".webp");
 }
 
 export const DynamicImageComponent = () => {
