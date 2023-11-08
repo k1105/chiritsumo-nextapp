@@ -11,7 +11,7 @@ export const Chiri: React.FC = () => {
     <div style={{ userSelect: "none" }}>
       <div style={{ height: 300, width: 300 }}>
         <Image
-          src={"/img/large/chiri-" + count + ".png"}
+          src={"/img/small/chiri-" + count + ".png"}
           layout="fill"
           objectFit="contain"
           alt="chiri"
