@@ -3,7 +3,7 @@
   width: 80vh;
   position: fixed;
   margin-top: -15vh;
-  margin-left: -25vh;
+  margin-left: -10vw;
 }
 
 @media screen and (max-width: 900px) {
