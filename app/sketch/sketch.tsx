@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Matter from "matter-js";
-import { drawOutline } from "../../lib/drawOutline";
 import React from "react";
 import { type Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
@@ -71,6 +70,17 @@ export const SketchComponent = () => {
       );
       floors.push(
         Bodies.rectangle(width / 3, height / 2, 10, height, {
+          isStatic: true,
+        })
+      );
+    } else {
+      floors.push(
+        Bodies.rectangle(width, height / 2, 10, height, {
+          isStatic: true,
+        })
+      );
+      floors.push(
+        Bodies.rectangle(0, height / 2, 10, height, {
           isStatic: true,
         })
       );
