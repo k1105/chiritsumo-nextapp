@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import Image from "next/image";
+import { DynamicImageComponent } from "./DynamicImage";
 
 export const Chiri: React.FC = () => {
   const count = useSelector((state: RootState) => state.counter.value);
@@ -9,7 +10,7 @@ export const Chiri: React.FC = () => {
 
   return (
     <div style={{ userSelect: "none" }}>
-      <div style={{ height: 300, width: 300 }}>
+      <div style={{ height: "25vh", width: "25vh" }}>
         <Image
           src={"/img/small/chiri-" + count + ".png"}
           layout="fill"
@@ -17,7 +18,7 @@ export const Chiri: React.FC = () => {
           alt="chiri"
         />
       </div>
-
+      <DynamicImageComponent />
       {/* <p
         style={{
           fontWeight: 600,
