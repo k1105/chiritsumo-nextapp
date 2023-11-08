@@ -5,20 +5,20 @@ import Image from "next/image";
 const imagePaths = [];
 
 for (let i = 0; i < 89; i++) {
-  imagePaths.push("/img/small/chiri-" + i + ".png");
+  imagePaths.push("/img/small/chiri-" + String(i + 1) + ".png");
 }
 
 export const DynamicImageComponent = () => {
   return (
-    <div>
+    <div style={{ display: "none" }}>
       {/* 表示される画像と、事前に読み込む画像 */}
-      <div style={{ display: "none" }}>
+      <div>
         {imagePaths.map((path) => (
           <Image
             key={path}
             src={path}
             alt="Preloaded image"
-            priority
+            // priority={true}
             width={300}
             height={300}
           />

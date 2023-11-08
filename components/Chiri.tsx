@@ -2,10 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import Image from "next/image";
-import { DynamicImageComponent } from "./DynamicImage";
 
 export const Chiri: React.FC = () => {
   const count = useSelector((state: RootState) => state.counter.value);
+  const imagePaths = [];
+
+  for (let i = 0; i < 89; i++) {
+    imagePaths.push("/img/small/chiri-" + String(i + 1) + ".png");
+  }
+
   //   const dispatch: AppDispatch = useDispatch();
 
   return (
@@ -18,7 +23,21 @@ export const Chiri: React.FC = () => {
           alt="chiri"
         />
       </div>
-      <DynamicImageComponent />
+      <div style={{ display: "none" }}>
+        {/* 表示される画像と、事前に読み込む画像 */}
+        <div>
+          {imagePaths.map((path) => (
+            <Image
+              key={path}
+              src={path}
+              alt="Preloaded image"
+              // priority={true}
+              width={300}
+              height={300}
+            />
+          ))}
+        </div>
+      </div>
       {/* <p
         style={{
           fontWeight: 600,
