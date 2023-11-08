@@ -1,19 +1,21 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { SketchComponent } from "./sketch/sketch";
-//@ts-ignore
 import styles from "./page.module.css";
 import { RequestPermissionModal } from "./requestPermissionModal";
 import { InvertButton } from "../components/invertButton";
+import { HeadingImage } from "@/components/HeadingImage";
 
 export default function Home() {
   const [requested, setRequested] = useState<boolean>(true);
   const mainRef = useRef<HTMLElement>(null);
+  // const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     if (navigator.userAgent.match(/iPhone/)) {
       setRequested(false);
     }
+    // imageRef.current.src = "/img/large/chiri-80.png";
   }, []);
 
   return (

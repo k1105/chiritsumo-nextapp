@@ -13,15 +13,16 @@ export const SketchComponent = () => {
     Bodies = Matter.Bodies,
     Composite = Matter.Composite,
     Mouse = Matter.Mouse,
-    Render = Matter.Render,
     Runner = Matter.Runner,
     Common = Matter.Common,
-    MouseConstraint = Matter.MouseConstraint;
+    MouseConstraint = Matter.MouseConstraint,
+    Events = Matter.Events;
 
   const floors: (typeof Bodies)[] = [];
   const characters: (typeof Bodies)[] = [];
   const imageArrayRef = useRef<Image[]>([]);
   const imageLength = 89;
+  const imagePath = useRef<string>("/img/large/chiri-1.png");
 
   // create an engine
   let engine: typeof Engine;
@@ -37,19 +38,6 @@ export const SketchComponent = () => {
 
       gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
       gravity.y = Common.clamp(event.beta, -90, 90) / 90;
-
-      // if (orientation === 0) {
-
-      // } else if (orientation === 180) {
-      //   gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
-      //   gravity.y = Common.clamp(-event.beta, -90, 90) / 90;
-      // } else if (orientation === 90) {
-      //   gravity.x = Common.clamp(event.beta, -90, 90) / 90;
-      //   gravity.y = Common.clamp(-event.gamma, -90, 90) / 90;
-      // } else if (orientation === -90) {
-      //   gravity.x = Common.clamp(-event.beta, -90, 90) / 90;
-      //   gravity.y = Common.clamp(event.gamma, -90, 90) / 90;
-      // }
     };
 
     window.addEventListener("deviceorientation", updateGravity);
@@ -83,24 +71,6 @@ export const SketchComponent = () => {
         })
       );
     }
-
-    // for (let i = 0; i < 100; i++) {
-    //   characters.push(
-    //     Bodies.trapezoid(
-    //       width / 2 + Math.random() * 100 - 50,
-    //       0,
-    //       characterSize.w,
-    //       characterSize.h,
-    //       0.2,
-    //       {
-    //         density: 1, //密度
-    //         frictionAir: 0.1, //空気抵抗
-    //         restitution: 0, //反発係数
-    //         friction: 0.8, //摩擦
-    //       }
-    //     )
-    //   );
-    // }
 
     setInterval(() => {
       if (characters.length < imageLength) {
@@ -143,6 +113,16 @@ export const SketchComponent = () => {
     // Runner
     const runner = Runner.create();
     Runner.run(runner, engine);
+
+    Events.on(runner, "tick", (event) => {
+      if (
+        mouseConstraint.body &&
+        mouseConstraint.body.label == "Trapezoid Body"
+      ) {
+        imagePath.current =
+          "/img/large/chiri-" + String(mouseConstraint.body.id - 4) + ".png";
+      }
+    });
 
     p5.preload = () => {
       for (let i = 0; i < imageLength; i++) {
