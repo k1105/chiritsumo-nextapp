@@ -7,6 +7,7 @@ import { Image } from "p5";
 import { useDispatch } from "react-redux";
 import { setCount } from "../../components/ConterSlice";
 import { AppDispatch } from "../../store";
+import { drawOutline } from "@/lib/drawOutline";
 
 export const SketchComponent = () => {
   const p5Ref = useRef(null);
@@ -46,7 +47,7 @@ export const SketchComponent = () => {
     window.addEventListener("deviceorientation", updateGravity);
     // 床追加
     floors.push(
-      Bodies.rectangle(width / 2, height * 0.95, width, height * 0.1, {
+      Bodies.rectangle(width / 2, height, width, height * 0.1, {
         isStatic: true,
       })
     );
@@ -64,7 +65,7 @@ export const SketchComponent = () => {
     if (width > 1200) {
       //pc用のブレークポイント
       floors.push(
-        Bodies.rectangle((width / 3) * 2, height / 2, 10, height, {
+        Bodies.rectangle(width, height / 2, 10, height, {
           isStatic: true,
         })
       );
@@ -104,7 +105,7 @@ export const SketchComponent = () => {
         characters.push(char);
         Composite.add(engine.world, char);
       }
-    }, 100);
+    }, 1000);
 
     engine = Engine.create();
     Composite.add(engine.world, [...floors, ...characters]);
@@ -148,7 +149,7 @@ export const SketchComponent = () => {
     };
 
     p5.setup = () => {
-      p5.createCanvas(width, height * 0.9);
+      p5.createCanvas(width, height * 0.98);
       p5.imageMode(p5.CENTER);
     };
 
@@ -178,7 +179,7 @@ export const SketchComponent = () => {
         p5.pop();
       });
       // for (const floor of floors) {
-      // drawOutline(floor, p5);
+      //   drawOutline(floor, p5);
       // }
       p5.pop();
 

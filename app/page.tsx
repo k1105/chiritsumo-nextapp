@@ -7,6 +7,7 @@ import { InvertButton } from "../components/invertButton";
 import { Chiri } from "@/components/Chiri";
 import { Provider } from "react-redux";
 import { store } from "../store";
+import { GridTypography } from "@/components/GridTypography";
 
 export default function Home() {
   const [requested, setRequested] = useState<boolean>(true);
@@ -24,7 +25,7 @@ export default function Home() {
     <main
       className={styles.main}
       ref={mainRef}
-      style={{ transition: "all 1000ms ease", filter: "invert(0)" }}
+      style={{ transition: "all 1000ms ease", filter: "invert(1) blur(0px)" }}
     >
       {!requested ? (
         <RequestPermissionModal setRequested={setRequested} />
@@ -36,9 +37,44 @@ export default function Home() {
             </div>
             <div className={styles.invertButton}>
               {/* <InvertButton mainRef={mainRef} /> */}
-
               <Chiri />
             </div>
+
+            <footer
+              style={{
+                position: "fixed",
+                bottom: 0,
+                left: 0,
+                width: "100vw",
+                height: "5vh",
+                borderTop: "1px solid black",
+              }}
+            >
+              <a
+                onClick={() => {
+                  if (mainRef.current!.style.filter == "invert(0)") {
+                    mainRef.current!.style.filter = "invert(1)";
+                  } else {
+                    mainRef.current!.style.filter = "invert(0)";
+                  }
+                }}
+              >
+                <GridTypography />
+                <p
+                  style={{
+                    // borderTop: "1px solid black",
+                    textAlign: "right",
+                    paddingRight: "2.5vw",
+                    lineHeight: "5vh",
+                    fontWeight: "600",
+                    fontSize: "1.2rem",
+                    userSelect: "none",
+                  }}
+                >
+                  ChiritsumoChallenge
+                </p>
+              </a>
+            </footer>
           </div>
         </Provider>
       )}

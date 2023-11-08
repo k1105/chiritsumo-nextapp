@@ -1,0 +1,34 @@
+.gridText {
+  font-weight: 600;
+  font-size: 1rem;
+  color: black;
+  border-left: 1px solid black;
+  padding-left: 10px;
+  height: 4vh;
+  position: fixed;
+  user-select: none;
+}
+
+.chiri {
+  bottom: 5vh;
+  left: 10px;
+}
+
+.yama {
+  bottom: 5vh;
+  left: 33vw;
+}
+
+@media screen and (max-width: 900px) {
+  .chiri {
+    bottom: 90vh;
+    left: 10px;
+    margin-left: -10px;
+    border-bottom: 1px solid black;
+    border-left: none;
+  }
+
+  .yama {
+    left: 10px;
+  }
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import Image from "next/image";
+import styles from "./Chiri.module.css";
 
 export const Chiri: React.FC = () => {
   const count = useSelector((state: RootState) => state.counter.value);
@@ -20,15 +21,7 @@ export const Chiri: React.FC = () => {
         pointerEvents: "none",
       }}
     >
-      <div
-        style={{
-          height: "80vh",
-          width: "80vh",
-          position: "fixed",
-          marginTop: "-20vh",
-          marginLeft: "-20vh",
-        }}
-      >
+      <div className={styles.container}>
         <Image
           src={imagePath}
           fill
@@ -37,18 +30,16 @@ export const Chiri: React.FC = () => {
           alt="chiri"
         />
       </div>
-      <p
+      {/* <p
         style={{
           fontWeight: 600,
-          fontSize: "1rem",
+          fontSize: "2rem",
           marginTop: "50px",
           color: "black",
         }}
       >
         {count < 10 ? "0" + String(count) : count}
-        <br />
-        2021.11.05
-      </p>
+      </p> */}
       {/* <p style={{ fontWeight: 600, fontSize: "2rem" }}>Chiritsumo Challenge</p> */}
     </div>
   );

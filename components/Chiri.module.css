@@ -1,0 +1,16 @@
+.container {
+  height: 80vh;
+  width: 80vh;
+  position: fixed;
+  margin-top: -15vh;
+  margin-left: -25vh;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    height: 300px;
+    width: 300px;
+    margin-top: 0;
+    margin-left: -80px;
+  }
+}
