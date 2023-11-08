@@ -8,7 +8,7 @@ export const Chiri: React.FC = () => {
   const [imagePath, setImagePath] = useState("/img/small/chiri-1.png");
 
   useEffect(() => {
-    setImagePath("/img/small/chiri-" + count + ".png");
+    setImagePath("/img/large/chiri-" + count + ".png");
   }, [count]);
 
   //   const dispatch: AppDispatch = useDispatch();
