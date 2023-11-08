@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import Image from "next/image";
@@ -6,22 +6,27 @@ import Image from "next/image";
 export const Chiri: React.FC = () => {
   const count = useSelector((state: RootState) => state.counter.value);
   const imagePaths = [];
+  const [imagePath, setImagePath] = useState("/img/small/chiri-1.png");
 
   for (let i = 0; i < 89; i++) {
     imagePaths.push("/img/small/chiri-" + String(i + 1) + ".png");
   }
 
+  useEffect(() => {
+    setImagePath("/img/small/chiri-" + count + ".png");
+  }, [count]);
+
   //   const dispatch: AppDispatch = useDispatch();
 
   return (
-    <div style={{ userSelect: "none" }}>
+    <div
+      style={{
+        userSelect: "none",
+        pointerEvents: "none",
+      }}
+    >
       <div style={{ height: "25vh", width: "25vh" }}>
-        <Image
-          src={"/img/small/chiri-" + count + ".png"}
-          layout="fill"
-          objectFit="contain"
-          alt="chiri"
-        />
+        <Image src={imagePath} layout="fill" objectFit="contain" alt="chiri" />
       </div>
       <div style={{ display: "none" }}>
         {/* 表示される画像と、事前に読み込む画像 */}
