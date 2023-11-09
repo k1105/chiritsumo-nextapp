@@ -74,7 +74,7 @@ export const RequestPermissionModal = ({ setRequested }: Props) => {
               textAlign: "center",
             }}
           >
-            <p style={{ textOverflow: "clip", userSelect: "none" }}>使用する</p>
+            <p style={{ textOverflow: "clip", userSelect: "none" }}>そうする</p>
           </span>
         </a>
         <a style={{ textAlign: "center" }} onClick={() => setRequested(true)}>

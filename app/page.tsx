@@ -14,7 +14,7 @@ export default function Home() {
   // const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (!navigator.userAgent.match(/iPhone/)) {
+    if (navigator.userAgent.match(/iPhone/)) {
       setRequested(false);
     }
     // imageRef.current.src = "/img/large/chiri-80.webp";
