@@ -10,12 +10,12 @@
 }
 
 .chiri {
-  bottom: 5svh;
+  bottom: 5dvh;
   left: 10px;
 }
 
 .yama {
-  bottom: 5svh;
+  bottom: 5dvh;
   left: 33vw;
 }
 
@@ -25,7 +25,7 @@
   }
 
   .chiri {
-    bottom: 90vh;
+    bottom: 90dvh;
     left: 10px;
     margin-left: -10px;
     padding-right: 30px;
