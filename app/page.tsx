@@ -14,7 +14,7 @@ export default function Home() {
   // const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (navigator.userAgent.match(/iPhone/)) {
+    if (!navigator.userAgent.match(/iPhone/)) {
       setRequested(false);
     }
     // imageRef.current.src = "/img/large/chiri-80.webp";
@@ -38,36 +38,35 @@ export default function Home() {
               {/* <InvertButton mainRef={mainRef} /> */}
               <Chiri />
             </div>
-
-            <footer className={styles.footer}>
-              <a
-                onClick={() => {
-                  if (mainRef.current!.style.filter == "invert(0)") {
-                    mainRef.current!.style.filter = "invert(1)";
-                  } else {
-                    mainRef.current!.style.filter = "invert(0)";
-                  }
-                }}
-              >
-                <GridTypography />
-                <p
-                  style={{
-                    // borderTop: "1px solid black",
-                    textAlign: "right",
-                    paddingRight: "2.5vw",
-                    lineHeight: "5vh",
-                    fontWeight: "600",
-                    fontSize: "1.2rem",
-                    userSelect: "none",
-                  }}
-                >
-                  ChiritsumoChallenge
-                </p>
-              </a>
-            </footer>
           </div>
+          <GridTypography />
         </Provider>
       )}
+      <footer className={styles.footer}>
+        <a
+          onClick={() => {
+            if (mainRef.current!.style.filter == "invert(0)") {
+              mainRef.current!.style.filter = "invert(1)";
+            } else {
+              mainRef.current!.style.filter = "invert(0)";
+            }
+          }}
+        >
+          <p
+            style={{
+              // borderTop: "1px solid black",
+              textAlign: "right",
+              paddingRight: "2.5vw",
+              lineHeight: "5vh",
+              fontWeight: "600",
+              fontSize: "1.2rem",
+              userSelect: "none",
+            }}
+          >
+            ChiritsumoChallenge
+          </p>
+        </a>
+      </footer>
     </main>
   );
 }

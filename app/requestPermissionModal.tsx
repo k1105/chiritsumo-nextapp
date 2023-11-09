@@ -33,13 +33,40 @@ export const RequestPermissionModal = ({ setRequested }: Props) => {
   };
 
   return (
-    <>
-      <p>端末の回転情報を使用すると、重力を意のままにできます。</p>
-      <div>
+    <div
+      style={{
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        width: "70vw",
+        transform: "translateY(-50%) translateX(-50%)",
+      }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          marginBottom: "10rem",
+          lineHeight: "1.4rem",
+        }}
+      >
+        <p style={{ marginBottom: "1rem" }}>
+          端末の回転情報を使用すると、
+          <br />
+          重力を意のままにできます。
+        </p>
+        <p style={{ fontSize: "0.8rem", lineHeight: "1rem", opacity: 0.6 }}>
+          Using orientation information,
+          <br />
+          you can manipulate gravity freely.
+        </p>
+      </div>
+
+      <div style={{ textAlign: "center" }}>
         <a onClick={requestDeviceOrientationPermission}>
           <span
             style={{
               display: "block",
+              margin: "0 auto 3rem auto",
               border: "1px solid black",
               width: "6rem",
               padding: "0.5rem",
@@ -50,8 +77,10 @@ export const RequestPermissionModal = ({ setRequested }: Props) => {
             <p style={{ textOverflow: "clip", userSelect: "none" }}>使用する</p>
           </span>
         </a>
-        <a onClick={() => setRequested(true)}>スキップ</a>
+        <a style={{ textAlign: "center" }} onClick={() => setRequested(true)}>
+          スキップ / Skip
+        </a>
       </div>
-    </>
+    </div>
   );
 };

@@ -1,9 +1,4 @@
 .main {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 6rem;
   min-height: 100vh;
   min-width: 100vw;
   color: black;
