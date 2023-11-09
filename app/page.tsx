@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { SketchComponent } from "./sketch/sketch";
 import styles from "./page.module.css";
 import { RequestPermissionModal } from "./requestPermissionModal";
-import { InvertButton } from "../components/invertButton";
 import { Chiri } from "@/components/Chiri";
 import { Provider } from "react-redux";
 import { store } from "../store";

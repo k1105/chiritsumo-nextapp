@@ -34,12 +34,23 @@ export const RequestPermissionModal = ({ setRequested }: Props) => {
 
   return (
     <>
-      <p>
-        本ページはデバイスの回転情報を使用します。許可する場合、「OK」を押してください。
-      </p>
+      <p>端末の回転情報を使用すると、重力を意のままにできます。</p>
       <div>
-        <button onClick={requestDeviceOrientationPermission}>OK</button>
-        <a onClick={() => setRequested(true)}>Skip</a>
+        <a onClick={requestDeviceOrientationPermission}>
+          <span
+            style={{
+              display: "block",
+              border: "1px solid black",
+              width: "6rem",
+              padding: "0.5rem",
+              borderRadius: "1.5rem",
+              textAlign: "center",
+            }}
+          >
+            <p style={{ textOverflow: "clip", userSelect: "none" }}>使用する</p>
+          </span>
+        </a>
+        <a onClick={() => setRequested(true)}>スキップ</a>
       </div>
     </>
   );
