@@ -40,16 +40,7 @@ export default function Home() {
               <Chiri />
             </div>
 
-            <footer
-              style={{
-                position: "fixed",
-                bottom: 0,
-                left: 0,
-                width: "100vw",
-                height: "5vh",
-                borderTop: "1px solid black",
-              }}
-            >
+            <footer className={styles.footer}>
               <a
                 onClick={() => {
                   if (mainRef.current!.style.filter == "invert(0)") {

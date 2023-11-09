@@ -22,3 +22,12 @@
   top: 30px;
   left: 5vw;
 }
+
+.footer {
+  position: fixed;
+  top: 95dvh;
+  left: 0;
+  width: 100vw;
+  height: 5vh;
+  border-top: 1px solid black;
+}
