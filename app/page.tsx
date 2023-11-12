@@ -9,13 +9,26 @@ import { store } from "../store";
 import { GridTypography } from "@/components/GridTypography";
 
 export default function Home() {
-  const [requested, setRequested] = useState<boolean>(true);
+  const [requested, setRequested] = useState<boolean>(false);
   const mainRef = useRef<HTMLElement>(null);
+  const requestContainerRef = useRef<HTMLDivElement>(null);
+  const sketchContainerRef = useRef<HTMLDivElement>(null);
   // const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (navigator.userAgent.match(/iPhone/)) {
-      setRequested(false);
+    if (requestContainerRef.current) {
+      if (requested) {
+        requestContainerRef.current.style.opacity = "0";
+        sketchContainerRef.current.style.opacity = "1";
+      } else {
+        requestContainerRef.current.style.opacity = "1";
+      }
+    }
+  }, [requested]);
+
+  useEffect(() => {
+    if (!navigator.userAgent.match(/iPhone/)) {
+      setRequested(true);
     }
     // imageRef.current.src = "/img/large/chiri-80.webp";
   }, []);
@@ -24,13 +37,24 @@ export default function Home() {
     <main
       className={styles.main}
       ref={mainRef}
-      style={{ transition: "all 1000ms ease", filter: "invert(1) blur(0px)" }}
+      style={{ transition: "all 1000ms ease", filter: "invert(1)" }}
     >
-      {!requested ? (
+      <div
+        ref={requestContainerRef}
+        style={{
+          transition: "all 1000ms ease",
+          opacity: 0,
+        }}
+      >
         <RequestPermissionModal setRequested={setRequested} />
-      ) : (
+      </div>
+
+      {requested ? (
         <Provider store={store}>
-          <div>
+          <div
+            ref={sketchContainerRef}
+            style={{ transition: "all 1000ms ease", opacity: 0 }}
+          >
             <div className={styles.sketch}>
               <SketchComponent />
             </div>
@@ -38,10 +62,13 @@ export default function Home() {
               {/* <InvertButton mainRef={mainRef} /> */}
               <Chiri />
             </div>
+            <GridTypography />
           </div>
-          <GridTypography />
         </Provider>
+      ) : (
+        <></>
       )}
+
       <footer className={styles.footer}>
         <a
           onClick={() => {
