@@ -13,7 +13,7 @@ export const Chiri: React.FC = () => {
     if (mainRef.current) mainRef.current.style.opacity = "0";
     setTimeout(() => {
       setImagePath("/img/large/chiri-" + count + ".webp");
-    }, 1000);
+    }, 300);
   }, [count]);
 
   //   const dispatch: AppDispatch = useDispatch();
@@ -24,7 +24,7 @@ export const Chiri: React.FC = () => {
       style={{
         userSelect: "none",
         pointerEvents: "none",
-        transition: "all 1000ms ease",
+        transition: "all 300ms ease",
         opacity: 0,
       }}
     >
