@@ -13,7 +13,6 @@ export const Chiri: React.FC = () => {
     if (mainRef.current) mainRef.current.style.opacity = "0";
     setTimeout(() => {
       setImagePath("/img/large/chiri-" + count + ".webp");
-      if (mainRef.current) mainRef.current.style.opacity = "1";
     }, 1000);
   }, [count]);
 
@@ -36,6 +35,9 @@ export const Chiri: React.FC = () => {
           priority
           style={{ objectFit: "contain" }}
           alt="chiri"
+          onLoadingComplete={() => {
+            if (mainRef.current) mainRef.current.style.opacity = "1";
+          }}
         />
       </div>
       {/* <p
