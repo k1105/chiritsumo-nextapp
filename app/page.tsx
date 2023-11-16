@@ -13,15 +13,20 @@ export default function Home() {
   const mainRef = useRef<HTMLElement>(null);
   const requestContainerRef = useRef<HTMLDivElement>(null);
   const sketchContainerRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef<boolean>(true);
   // const imageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (requestContainerRef.current) {
-      if (requested) {
-        requestContainerRef.current.style.opacity = "0";
-        sketchContainerRef.current.style.opacity = "1";
-      } else {
-        requestContainerRef.current.style.opacity = "1";
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      if (requestContainerRef.current) {
+        if (requested) {
+          requestContainerRef.current.style.opacity = "0";
+          sketchContainerRef.current.style.opacity = "1";
+        } else {
+          requestContainerRef.current.style.opacity = "1";
+        }
       }
     }
   }, [requested]);
