@@ -37,7 +37,7 @@ export default function Home() {
     <main
       className={styles.main}
       ref={mainRef}
-      style={{ transition: "all 1000ms ease", filter: "invert(1)" }}
+      style={{ transition: "all 1000ms ease", filter: "invert(0)" }}
     >
       <div
         ref={requestContainerRef}
@@ -58,7 +58,7 @@ export default function Home() {
             <div className={styles.sketch}>
               <SketchComponent />
             </div>
-            <div className={styles.invertButton}>
+            <div className={styles.invertButton} style={{ zIndex: "-99" }}>
               {/* <InvertButton mainRef={mainRef} /> */}
               <Chiri />
             </div>

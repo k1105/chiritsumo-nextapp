@@ -10,7 +10,7 @@ export const Chiri: React.FC = () => {
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (mainRef.current) mainRef.current.style.opacity = "0";
+    // if (mainRef.current) mainRef.current.style.opacity = "0";
     setTimeout(() => {
       setImagePath("/img/large/chiri-" + count + ".webp");
     }, 300);
@@ -25,11 +25,37 @@ export const Chiri: React.FC = () => {
         userSelect: "none",
         pointerEvents: "none",
         transition: "all 300ms ease",
-        opacity: 0,
+        opacity: 1,
       }}
     >
       <div className={styles.container}>
+        <p
+          style={{
+            width: "60vh",
+            marginTop: "60vh",
+            marginBottom: "5vh",
+            display: "block",
+            fontWeight: "600",
+            fontSize: "1.1rem",
+          }}
+        >
+          Kanata Yamagishi / 山岸 奏大
+        </p>
+        <p>
+          東京理科大学 工学部 情報工学科
+          <br /> 情報科学芸術大学院大学 メディア表現研究科
+        </p>
         <Image
+          src="/img/profile_pic.jpeg"
+          fill
+          priority
+          style={{ objectFit: "contain", zIndex: "-1" }}
+          alt="chiri"
+          onLoadingComplete={() => {
+            if (mainRef.current) mainRef.current.style.opacity = "1";
+          }}
+        />
+        {/* <Image
           src={imagePath}
           fill
           priority
@@ -38,8 +64,9 @@ export const Chiri: React.FC = () => {
           onLoadingComplete={() => {
             if (mainRef.current) mainRef.current.style.opacity = "1";
           }}
-        />
+        /> */}
       </div>
+
       {/* <p
         style={{
           fontWeight: 600,

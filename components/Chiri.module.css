@@ -1,9 +1,9 @@
 .container {
-  height: 80vh;
-  width: 80vh;
+  height: 60vh;
+  width: 27vw;
   position: fixed;
-  margin-top: -15vh;
-  margin-left: -10vw;
+  margin-top: 5vh;
+  margin-left: -3vw;
 }
 
 @media screen and (max-width: 900px) {
