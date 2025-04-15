@@ -6,8 +6,16 @@ import styles from "./Chiri.module.css";
 
 export const Chiri: React.FC = () => {
   const count = useSelector((state: RootState) => state.counter.value);
-  const [imagePath, setImagePath] = useState("/img/small/chiri-1.webp");
+  const [imagePath, setImagePath] = useState("/img/large/chiri-1.webp");
   const mainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // 画像のプリロード
+    for (let i = 1; i <= 90; i++) {
+      const img = document.createElement("img");
+      img.src = `/img/large/chiri-${i}.webp`;
+    }
+  }, []);
 
   useEffect(() => {
     if (mainRef.current) mainRef.current.style.opacity = "0";
@@ -41,17 +49,6 @@ export const Chiri: React.FC = () => {
           }}
         />
       </div>
-      {/* <p
-        style={{
-          fontWeight: 600,
-          fontSize: "2rem",
-          marginTop: "50px",
-          color: "black",
-        }}
-      >
-        {count < 10 ? "0" + String(count) : count}
-      </p> */}
-      {/* <p style={{ fontWeight: 600, fontSize: "2rem" }}>Chiritsumo Challenge</p> */}
     </div>
   );
 };

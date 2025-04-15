@@ -58,7 +58,9 @@ export const SketchComponent = () => {
 
     // デバイスオリエンテーションが利用可能な場合のみイベントリスナーを追加
     if (window.DeviceOrientationEvent) {
-      window.addEventListener("deviceorientation", updateGravity);
+      window.addEventListener("deviceorientation", updateGravity, {
+        passive: true,
+      });
     }
     // 床追加
     floors.push(
@@ -126,7 +128,6 @@ export const SketchComponent = () => {
 
     // add mouse control
     const mouse = Mouse.create(p5Ref.current);
-    // render.mouse = mouse;
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
       constraint: {
@@ -136,6 +137,11 @@ export const SketchComponent = () => {
         },
       },
     });
+
+    // マウスホイールイベントをpassiveに設定
+    if (p5Ref.current) {
+      p5Ref.current.addEventListener("wheel", () => {}, {passive: true});
+    }
 
     Composite.add(engine.world, mouseConstraint);
 
