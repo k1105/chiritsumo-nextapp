@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import React, {useEffect, useRef, useState} from "react";
+import {useSelector} from "react-redux";
+import {RootState} from "../store";
 import Image from "next/image";
 import styles from "./Chiri.module.css";
 
@@ -32,10 +32,11 @@ export const Chiri: React.FC = () => {
         <Image
           src={imagePath}
           fill
+          sizes="300px"
           priority
-          style={{ objectFit: "contain" }}
+          style={{objectFit: "contain"}}
           alt="chiri"
-          onLoadingComplete={() => {
+          onLoad={() => {
             if (mainRef.current) mainRef.current.style.opacity = "1";
           }}
         />

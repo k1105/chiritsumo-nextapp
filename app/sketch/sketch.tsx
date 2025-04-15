@@ -1,13 +1,13 @@
-import { useRef } from "react";
+import {useRef} from "react";
 import Matter from "matter-js";
 import React from "react";
-import { type Sketch } from "@p5-wrapper/react";
-import { NextReactP5Wrapper } from "@p5-wrapper/next";
-import { Image } from "p5";
-import { useDispatch } from "react-redux";
-import { setCount } from "../../components/ConterSlice";
-import { AppDispatch } from "../../store";
-import { drawOutline } from "@/lib/drawOutline";
+import {type Sketch} from "@p5-wrapper/react";
+import {NextReactP5Wrapper} from "@p5-wrapper/next";
+import {Image} from "p5";
+import {useDispatch} from "react-redux";
+import {setCount} from "../../components/ConterSlice";
+import {AppDispatch} from "../../store";
+import {drawOutline} from "@/lib/drawOutline";
 
 export const SketchComponent = () => {
   const p5Ref = useRef(null);
@@ -28,23 +28,38 @@ export const SketchComponent = () => {
   const imagePath = useRef<string>("/img/large/chiri-1.webp");
   const dispatch: AppDispatch = useDispatch();
 
-  // create an engine
+  // create an engine first
   let engine: typeof Engine;
 
   const sketch: Sketch = (p5) => {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    const characterSize = width > 1200 ? { w: 60, h: 60 } : { w: 40, h: 40 };
+    const characterSize = width > 1200 ? {w: 60, h: 60} : {w: 40, h: 40};
+
+    // create an engine first
+    engine = Engine.create();
 
     const updateGravity = (event) => {
       const gravity = engine.world.gravity;
-
-      gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
-      gravity.y = Common.clamp(event.beta, -90, 90) / 90;
+      if (event && event.alpha && event.beta) {
+        // デバイスオリエンテーションが利用可能な場合
+        gravity.x = Common.clamp(event.alpha, -90, 90) / 90;
+        gravity.y = Common.clamp(event.beta, -90, 90) / 90;
+      } else {
+        // PCなどデバイスオリエンテーションが利用できない場合
+        gravity.x = 0;
+        gravity.y = 0.5; // 下向きの重力
+      }
     };
 
-    window.addEventListener("deviceorientation", updateGravity);
+    // 初期重力を設定
+    updateGravity(null);
+
+    // デバイスオリエンテーションが利用可能な場合のみイベントリスナーを追加
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener("deviceorientation", updateGravity);
+    }
     // 床追加
     floors.push(
       Bodies.rectangle(width / 2, height, width, height * 0.1, {
@@ -107,7 +122,6 @@ export const SketchComponent = () => {
       }
     }, 1000);
 
-    engine = Engine.create();
     Composite.add(engine.world, [...floors, ...characters]);
 
     // add mouse control
