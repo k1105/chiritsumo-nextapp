@@ -42,9 +42,9 @@ export const SketchComponent = () => {
 
     const updateGravity = (event) => {
       const gravity = engine.world.gravity;
-      if (event && event.alpha && event.beta) {
+      if (event && event.gamma && event.beta) {
         // デバイスオリエンテーションが利用可能な場合
-        gravity.x = Common.clamp(event.alpha, -90, 90) / 90;
+        gravity.x = Common.clamp(event.gamma, -90, 90) / 90;
         gravity.y = Common.clamp(event.beta, -90, 90) / 90;
       } else {
         // PCなどデバイスオリエンテーションが利用できない場合
